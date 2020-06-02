@@ -29,18 +29,23 @@ public class Game {
 		String card4 = getDeck().drawCard();
 		
 		getPlayer().addCard(card1, card2);
-		//getPlayer().setDealtHandValue();
+		getPlayer().setDealtHandValue();
 		
 		//getDealer().addCard(card3, card4);
 		//getDealer().setDealtHandValue();
 	}
 	
-//	public void playerTwist() {
-//		String card = getDeck().drawCard();
-//		getPlayer().addCard(card);
-//		getPlayer().setTwistHandValue();
-//	}
-//	
+	public void playerTwist() {
+		String card = getDeck().drawCard();
+		getPlayer().addCard(card);
+		getPlayer().setTwistHandValue();
+	}
+	
+	public void resetGame() {
+		getPlayer().resetValues();
+		getDealer().resetValues();
+	}
+	
 //	public void dealerTwist() {
 //		String card = getDeck().drawCard();
 //		//getDealer().addCard(card);
