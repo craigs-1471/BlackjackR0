@@ -9,11 +9,21 @@ public class Player {
 	private ArrayList<String> currentHand;
 	private int currentHandValue;
 	private boolean bust;
+	private int onePound;
+	private int twoPound;
+	private int fivePound;
+	private int tenPounds;
+	private int twentyPounds;
 	
 	// Constructor
 	public Player() {
 		currentHand = new ArrayList<String>();
 		bust = false;
+		onePound = 20;
+		twoPound = 20;
+		fivePound = 20;
+		tenPounds = 10;
+		twentyPounds = 7;
 	}
 	
 	// Methods
@@ -29,7 +39,7 @@ public class Player {
 	public void resetValues() {
 		setBust(false);
 		setCurrentHandValue(0);
-		setCurrentHand(null);
+		currentHand.removeAll(currentHand);
 	}
 	
 //	public String currentPlayerHandToString() {
@@ -131,6 +141,7 @@ public class Player {
 		
 		while(this.currentHandValue > 21 && totalAces > 0) {
 			this.currentHandValue-= 10;
+			totalAces--;
 		}
 		
 		if(this.currentHandValue > 21) {

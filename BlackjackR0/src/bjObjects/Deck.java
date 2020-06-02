@@ -6,6 +6,7 @@ public class Deck {
 	
 	// Deck fields
 	private String[][] deck;
+	private int count;
 	
 	// Constructor
 	public Deck() {
@@ -36,6 +37,13 @@ public class Deck {
 		} while(card == "X");
 		
 		this.deck[suit][value] = "X";
+		
+		if(value <= 4) {
+			count++;
+		}
+		else if(value >= 8) {
+			count--;
+		}
 		return card;
 	}
 	
@@ -59,4 +67,11 @@ public class Deck {
 		this.deck = deck;
 	}
 
+	public int getCount() {
+		return count;
+	}
+
+	public void setCount(int count) {
+		this.count = count;
+	}
 }
