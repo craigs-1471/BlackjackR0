@@ -31,8 +31,8 @@ public class Game {
 		getPlayer().addCard(card1, card2);
 		getPlayer().setDealtHandValue();
 		
-		//getDealer().addCard(card3, card4);
-		//getDealer().setDealtHandValue();
+		getDealer().addCard(card3, card4);
+		getDealer().setDealtHandValue();
 	}
 	
 	public void playerTwist() {

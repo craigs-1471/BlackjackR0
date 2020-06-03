@@ -22,12 +22,13 @@ public class ApplicationWindow {
 	private JButton btnNewGame;
 	private JPanel pnlPlayerDealtCards;
 	private Game game;
-	private JLabel lblCurrentTotal;
+	private JLabel lblCurrentPlayerTotal;
 	private JPanel pnlPlayerTwistCards;
 	private JButton btnTwist;
 	private JPanel pnlDealerDealtCards;
 	private JPanel pnlDealerTwistCards;
 	private JLabel lblcount;
+	private JLabel lblCurrentDealerTotal;
 
 	/**
 	 * Launch the application.
@@ -78,15 +79,28 @@ public class ApplicationWindow {
 					Card cardOne = new Card(game.getPlayer().getCurrentHand().get(0));
 					Card cardTwo = new Card(game.getPlayer().getCurrentHand().get(1));
 					
-					String currentTotal = "Current Total: ";
+					String currentTotal = "Current Player Total: ";
 					currentTotal += game.getPlayer().getCurrentHandValue();
-					lblCurrentTotal.setText(currentTotal);
+					lblCurrentPlayerTotal.setText(currentTotal);
 					
 					pnlPlayerDealtCards.setLayout(new GridLayout(1,2));
 					pnlPlayerDealtCards.add(cardOne);
 					pnlPlayerDealtCards.add(cardTwo);
 					btnDeal.setVisible(false);
 					pnlPlayerDealtCards.setVisible(true);
+					
+					Card cardThree = new Card(game.getDealer().getCurrentHand().get(0));
+					Card cardFour = new Card("back");
+					
+					pnlDealerDealtCards.setLayout(new GridLayout(1,2));
+					pnlDealerDealtCards.add(cardThree);
+					pnlDealerDealtCards.add(cardFour);
+					pnlDealerDealtCards.setVisible(true);
+					
+					String currentDealerTotal = "Current Dealer Total: ";
+					currentDealerTotal += game.getDealer().initialTotal();
+					lblCurrentDealerTotal.setText(currentDealerTotal);
+					
 					frame.setVisible(true);
 				}
 			}
@@ -100,7 +114,7 @@ public class ApplicationWindow {
 				
 				game.resetGame();
 				String currentTotal = "Current Total: ";
-				lblCurrentTotal.setText(currentTotal);
+				lblCurrentPlayerTotal.setText(currentTotal);
 				pnlPlayerDealtCards.removeAll();
 				pnlPlayerTwistCards.removeAll();
 				pnlPlayerDealtCards.setVisible(false);
@@ -122,9 +136,9 @@ public class ApplicationWindow {
 		frame.getContentPane().add(pnlPlayerDealtCards);
 		pnlPlayerDealtCards.setLayout(new GridLayout(1, 0, 0, 0));
 		
-		lblCurrentTotal = new JLabel("Current Total: ");
-		lblCurrentTotal.setBounds(54, 85, 122, 14);
-		frame.getContentPane().add(lblCurrentTotal);
+		lblCurrentPlayerTotal = new JLabel("Current Player Total: ");
+		lblCurrentPlayerTotal.setBounds(54, 421, 200, 14);
+		frame.getContentPane().add(lblCurrentPlayerTotal);
 		
 		btnTwist = new JButton("Twist");
 		btnTwist.addActionListener(new ActionListener() {
@@ -146,7 +160,7 @@ public class ApplicationWindow {
 					
 					String currentTotal = "Current Total: ";
 					currentTotal += game.getPlayer().getCurrentHandValue();
-					lblCurrentTotal.setText(currentTotal);
+					lblCurrentPlayerTotal.setText(currentTotal);
 					
 					if(game.getPlayer().isBust()) {
 						btnNewGame.setVisible(true);
@@ -175,5 +189,9 @@ public class ApplicationWindow {
 		lblcount = new JLabel("Current Count: ");
 		lblcount.setBounds(54, 110, 141, 14);
 		frame.getContentPane().add(lblcount);
+		
+		lblCurrentDealerTotal = new JLabel("Current Dealer Total: ");
+		lblCurrentDealerTotal.setBounds(53, 170, 201, 14);
+		frame.getContentPane().add(lblCurrentDealerTotal);
 	}
 }
