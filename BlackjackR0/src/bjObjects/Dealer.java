@@ -8,4 +8,10 @@ public class Dealer extends Player {
 		return visibleCardValue;
 	}
 	
+	public void dealersTurn() {
+		if(getCurrentHandValue() <= 16) {
+			
+		}
+	}
+	
 }

@@ -29,6 +29,7 @@ public class ApplicationWindow {
 	private JPanel pnlDealerTwistCards;
 	private JLabel lblcount;
 	private JLabel lblCurrentDealerTotal;
+	private JButton btnStick;
 
 	/**
 	 * Launch the application.
@@ -101,6 +102,8 @@ public class ApplicationWindow {
 					currentDealerTotal += game.getDealer().initialTotal();
 					lblCurrentDealerTotal.setText(currentDealerTotal);
 					
+					btnTwist.setVisible(true);
+					btnStick.setVisible(true);
 					frame.setVisible(true);
 				}
 			}
@@ -164,6 +167,7 @@ public class ApplicationWindow {
 					
 					if(game.getPlayer().isBust()) {
 						btnNewGame.setVisible(true);
+						btnStick.setVisible(false);
 					}
 					
 					frame.setVisible(true);
@@ -171,8 +175,9 @@ public class ApplicationWindow {
 				}
 			}
 		});
-		btnTwist.setBounds(508, 612, 89, 23);
+		btnTwist.setBounds(404, 612, 89, 23);
 		frame.getContentPane().add(btnTwist);
+		btnTwist.setVisible(false);
 		
 		pnlPlayerTwistCards = new JPanel();
 		pnlPlayerTwistCards.setBounds(283, 446, 546, 155);
@@ -193,5 +198,33 @@ public class ApplicationWindow {
 		lblCurrentDealerTotal = new JLabel("Current Dealer Total: ");
 		lblCurrentDealerTotal.setBounds(53, 170, 201, 14);
 		frame.getContentPane().add(lblCurrentDealerTotal);
+		
+		btnStick = new JButton("Stick");
+		btnStick.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				pnlDealerDealtCards.remove(1);
+				Card secondDealerCard = new Card(game.getDealer().getCurrentHand().get(1));
+				pnlDealerDealtCards.add(secondDealerCard);
+				
+				game.dealerGo();
+				
+				for(int i = 2; i < game.getDealer().getCurrentHand().size(); i++) {
+					
+					pnlDealerTwistCards.add(new Card(game.getDealer().getCurrentHand().get(i)));
+					
+				}
+				
+				
+				frame.setVisible(true);
+				pnlDealerDealtCards.setVisible(true);
+				pnlDealerTwistCards.setVisible(true);
+				
+				
+			}
+		});
+		btnStick.setBounds(506, 612, 89, 23);
+		frame.getContentPane().add(btnStick);
+		btnStick.setVisible(false);
 	}
 }

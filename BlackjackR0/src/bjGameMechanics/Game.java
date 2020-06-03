@@ -46,12 +46,26 @@ public class Game {
 		getDealer().resetValues();
 	}
 	
-//	public void dealerTwist() {
-//		String card = getDeck().drawCard();
-//		//getDealer().addCard(card);
-//		//getDealer().setTwistHandValue();
-//	}
-//	
+	public void dealerTwist() {
+		String card = getDeck().drawCard();
+		getDealer().addCard(card);
+		getDealer().setTwistHandValue();
+	}
+	
+	public void dealerGo() {
+		
+		while(getDealer().getCurrentHandValue() <= 16) {
+			String card = getDeck().drawCard();
+			getDealer().addCard(card);
+			getDealer().setTwistHandValue();
+		}
+		
+		if(getDealer().isBust()) {
+			System.out.println("Dealer Bust");
+		}
+		
+	}
+	
 //	public String getCurrentHands() {
 //		String output;
 //		output = getPlayer().currentPlayerHandToString() + "\n";
